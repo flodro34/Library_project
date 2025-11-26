@@ -19,9 +19,23 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    // ISBN : International Standard Book Number
+    // <2007 : 10 digits
+    // 2007+ : 13 digits
+    @Column(unique = true)
+    String isbn;
+
     String name;
 
     Integer pages;
+
+    Integer year;
+
+    String description;
+
+
+
+
 
 
 }

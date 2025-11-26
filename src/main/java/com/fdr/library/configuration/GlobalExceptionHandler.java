@@ -1,6 +1,7 @@
 package com.fdr.library.configuration;
 
 
+import com.fdr.library.book.model.exception.BookCreationException;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -19,6 +20,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ProblemDetail> catchBadRequest(BadRequestException ex) {
+        ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return ResponseEntity.status(pd.getStatus()).body(pd);
+    }
+
+    @ExceptionHandler(BookCreationException.class)
+    public ResponseEntity<ProblemDetail> catchBookCreation(BookCreationException ex) {
         ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
         return ResponseEntity.status(pd.getStatus()).body(pd);
     }
